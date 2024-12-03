@@ -3,6 +3,7 @@ package com.example.t2305m_wcd.dao;
 import com.example.t2305m_wcd.database.Database;
 import com.example.t2305m_wcd.entity.Student;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -34,7 +35,18 @@ public class StudentDAO implements DAOInterface<Student,Long> {
 
     @Override
     public void create(Student student) {
-
+        try {
+            String sql = "INSERT INTO students(name,email,address,telephone) values(?,?,?,?)";
+            Database db = Database.createInstance();
+            PreparedStatement pr = db.getPreparedStatement(sql);
+            pr.setString(1,student.getName());
+            pr.setString(2,student.getEmail());
+            pr.setString(3,student.getAddress());
+            pr.setString(4,student.getTelephone());
+            pr.execute();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
