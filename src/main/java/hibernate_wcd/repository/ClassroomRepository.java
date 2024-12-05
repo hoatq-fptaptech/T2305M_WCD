@@ -2,6 +2,8 @@ package hibernate_wcd.repository;
 
 import hibernate_wcd.entity.Classroom;
 
+import java.util.List;
+
 public interface ClassroomRepository extends Repository<Classroom,Long>{
-    Classroom findByName(String name);
+    List<Classroom> findByName(String name);
 }
